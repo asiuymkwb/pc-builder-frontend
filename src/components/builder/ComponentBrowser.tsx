@@ -55,7 +55,7 @@ export default function ComponentBrowser({ category, compatibility, buildId, onS
   const [onlyCompatible, setOnlyCompatible] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const Icon = (Icons as Record<string, React.ElementType>)[category.icon] ?? Icons.Box
+  const Icon = (Icons as unknown as Record<string, React.ElementType>)[category.icon] ?? Icons.Box
   const specKeys = SPEC_TAGS[category.slug] ?? []
 
   const categoryErrors = compatibility?.errors.filter((e) => {

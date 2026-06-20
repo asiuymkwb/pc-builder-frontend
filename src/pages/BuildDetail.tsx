@@ -72,7 +72,8 @@ export default function BuildDetail() {
 
   if (!build) return null
 
-  const componentsByCategory: Record<string, typeof build.components[0]> = {}
+  type BuildComponent = NonNullable<typeof build.components>[number]
+  const componentsByCategory: Record<string, BuildComponent> = {}
   for (const c of build.components ?? []) {
     if (c.category?.slug) componentsByCategory[c.category.slug] = c
   }
@@ -132,7 +133,7 @@ export default function BuildDetail() {
               const component = componentsByCategory[category.slug]
               if (!component) return null
 
-              const Icon = (Icons as Record<string, React.ElementType>)[category.icon] ?? Icons.Box
+              const Icon = (Icons as unknown as Record<string, React.ElementType>)[category.icon] ?? Icons.Box
 
               return (
                 <div

@@ -199,7 +199,7 @@ export default function AdminDashboard() {
               onClick={() => { setView("components"); setSelectedCategory("all"); setPage(1) }}
             />
             {categories.map((cat) => {
-              const CatIcon = (Icons as Record<string, React.ElementType>)[cat.icon] ?? Icons.Box
+              const CatIcon = (Icons as unknown as Record<string, React.ElementType>)[cat.icon] ?? Icons.Box
               return (
                 <SidebarItem
                   key={cat.id}
@@ -286,7 +286,7 @@ export default function AdminDashboard() {
               onClick={() => { setView("components"); setSelectedCategory("all"); setPage(1); setSidebarOpen(false) }}
             />
             {categories.map((cat) => {
-              const CatIcon = (Icons as Record<string, React.ElementType>)[cat.icon] ?? Icons.Box
+              const CatIcon = (Icons as unknown as Record<string, React.ElementType>)[cat.icon] ?? Icons.Box
               return (
                 <SidebarItem
                   key={cat.id}
