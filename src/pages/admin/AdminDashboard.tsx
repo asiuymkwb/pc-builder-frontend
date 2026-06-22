@@ -618,14 +618,14 @@ export default function AdminDashboard() {
       <AlertDialog open={deleteId !== null} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Disattivare il componente?</AlertDialogTitle>
+            <AlertDialogTitle>Eliminare il componente?</AlertDialogTitle>
             <AlertDialogDescription>
-              "{componentToDelete?.name}" verrà nascosto dal catalogo.
+              "{componentToDelete?.name}" verrà eliminato dal catalogo.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Annulla</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteComponent}>Disattiva</AlertDialogAction>
+            <AlertDialogAction onClick={handleDeleteComponent}>Elimina</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
