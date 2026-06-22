@@ -52,7 +52,6 @@ export default function AdminDashboard() {
   // stato componenti
   const [categories, setCategories] = useState<Category[]>([])
   const [components, setComponents] = useState<Component[]>([])
-  const [stats, setStats] = useState<Stats | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1)
@@ -70,7 +69,6 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     myFetch<Category[]>("/categories").then(setCategories)
-    myFetch<Stats>("/admin/stats").then(setStats).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -109,7 +107,6 @@ export default function AdminDashboard() {
         setTotal(res.total)
       })
       .finally(() => setLoading(false))
-    myFetch<Stats>("/admin/stats").then(setStats).catch(() => {})
   }
 
   const handleDeleteComponent = async () => {
@@ -118,7 +115,6 @@ export default function AdminDashboard() {
     setComponents((prev) => prev.filter((c) => c.id !== deleteId))
     setTotal((prev) => prev - 1)
     setDeleteId(null)
-    myFetch<Stats>("/admin/stats").then(setStats).catch(() => {})
   }
 
   const handleChangeRole = async (userId: number, role: UserItem["role"]) => {
@@ -134,7 +130,6 @@ export default function AdminDashboard() {
     await myFetch(`/admin/users/${deleteUserId}`, { method: "DELETE" })
     setUsers((prev) => prev.filter((u) => u.id !== deleteUserId))
     setDeleteUserId(null)
-    myFetch<Stats>("/admin/stats").then(setStats).catch(() => {})
   }
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -161,30 +156,6 @@ export default function AdminDashboard() {
             <p className="text-xs text-muted-foreground mt-0.5 ml-6">Pannello amministrazione</p>
           </div>
 
-          {stats && (
-            <div className="px-5 py-5 border-b border-border">
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">
-                    {stats.total_components}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Componenti</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">
-                    {stats.builds_today}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Build oggi</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">
-                    {stats.total_users}
-                  </p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Utenti</p>
-                </div>
-              </div>
-            </div>
-          )}
 
           <nav className="flex-1 px-3 py-3 overflow-y-auto">
 
@@ -254,25 +225,6 @@ export default function AdminDashboard() {
             </div>
             <p className="text-xs text-muted-foreground mt-0.5 ml-6">Pannello amministrazione</p>
           </div>
-
-          {stats && (
-            <div className="px-5 py-5 border-b border-border">
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">{stats.total_components}</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Componenti</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">{stats.builds_today}</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Build oggi</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tabular-nums leading-none">{stats.total_users}</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Utenti</p>
-                </div>
-              </div>
-            </div>
-          )}
 
           <nav className="flex-1 px-3 py-3 overflow-y-auto">
             <p className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">
