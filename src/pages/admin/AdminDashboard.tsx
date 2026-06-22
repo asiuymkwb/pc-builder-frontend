@@ -26,13 +26,6 @@ type PaginatedComponents = {
   total: number
 }
 
-type Stats = {
-  total_components: number
-  builds_today: number
-  total_users: number
-  most_used_component?: { id: number; name: string; brand: string } | null
-}
-
 type UserItem = {
   id: number
   name: string
